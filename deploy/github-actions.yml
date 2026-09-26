@@ -1,0 +1,52 @@
+# Runs `pnpm scout notify` every 10 minutes on GitHub Actions and posts new alerts to Slack.
+# Setup, in a private copy of this repository: copy this file to .github/workflows/scout.yml, commit your profile
+# (git add -f scout.yaml), and add the repository secrets TYPESAFE_API_KEY, TREG_TOKEN (and TREG_ORG for identity
+# tokens) and SLACK_WEBHOOK_URL. See docs/deploy.md.
+name: scout
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # GitHub may start scheduled runs a few minutes late
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One run at a time: runs share the SQLite state.
+concurrency:
+  group: scout
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # xscout's state (seen posts, events, costs) lives in data/. Restore the latest copy.
+      - uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: scout-data-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: scout-data-
+
+      - run: pnpm -s scout notify
+        env:
+          SCOUT_PROFILE: scout.yaml
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          TREG_TOKEN: ${{ secrets.TREG_TOKEN }}
+          TREG_ORG: ${{ secrets.TREG_ORG }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: data
+          key: scout-data-${{ github.run_id }}-${{ github.run_attempt }}

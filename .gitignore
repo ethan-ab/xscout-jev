@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+node_modules/
+data/
+*.db
+*.db-*
+scout.yaml
+*.log
+.playwright-mcp/
+.DS_Store
+coverage/
+.claude/settings.local.json

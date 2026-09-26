@@ -1,0 +1,128 @@
+# Competitive intelligence: a fictional managed-Postgres company watching its competitors
+# for launches, pricing changes, funding and incidents, to brief sales and product.
+# Every field is documented in docs/profile.md.
+
+name: competitive-intel
+
+org:
+  name: Pillar
+  about: Pillar is a managed Postgres service for startups, competing with Supabase, Neon, PlanetScale, Turso, Xata and Convex on price, developer experience and reliability.
+
+locale:
+  timezone: America/New_York
+  lang: en
+
+# The competitors are named in every topic: without names, any company's funding or outage would match.
+topics:
+  - id: launch
+    label: Product launch
+    what: "Supabase, Neon, PlanetScale, Turso, Xata or Convex launches or ships a product, feature, region, integration or major version"
+    not_for: tutorials, customer stories and conference talks with nothing new; launches by any other company
+    examples:
+      - Neon now supports read replicas in every region
+      - Supabase launches a managed queue service
+  - id: pricing
+    label: Pricing
+    what: "Supabase, Neon, PlanetScale, Turso, Xata or Convex changes prices, plans, free tiers or limits"
+    not_for: price changes by any other company
+    examples:
+      - PlanetScale is removing its free Hobby plan
+      - Turso cuts storage prices by 50%
+  - id: company
+    label: Company
+    what: "funding, acquisitions, partnerships, leadership changes or layoffs at Supabase, Neon, PlanetScale, Turso, Xata or Convex"
+    not_for: hiring posts for individual roles; funding, deals or acquisitions of any other company, including cloud and AI infrastructure companies
+    examples:
+      - Convex raises a $40M Series B
+      - Neon is joining Databricks
+  - id: incident
+    label: Incident
+    what: "outages, data loss, security incidents or degraded service at Supabase, Neon, PlanetScale, Turso, Xata or Convex"
+    not_for: incidents at any other company
+    examples:
+      - We are investigating elevated error rates on database connections in us-east-1
+      - Supabase Auth is down in eu-west-1 and sign-ins are failing
+
+classification:
+  context: We track six competitors of Pillar, a managed Postgres service - Supabase, Neon, PlanetScale, Turso, Xata and Convex. Pick other for database or cloud news about any other company and off_topic for anything else.
+  other:
+    what: database, cloud or developer-platform news about companies other than the six competitors
+  off_topic:
+    what: "not about these companies' products or business: general tech news, memes, personal posts"
+
+sources:
+  primary:
+    supabase: official Supabase account (competitor)
+    neondatabase: official Neon account (competitor)
+    PlanetScale: official PlanetScale account (competitor)
+    tursodatabase: official Turso account (competitor)
+    convex: official Convex account (competitor)
+    xata: official Xata account (competitor)
+  amplifiers:
+    TechCrunch: tech news outlet
+    Techmeme: tech news aggregator
+    thenewstack: developer and infrastructure news outlet
+  keywords:
+    competitors: 'Supabase OR "Neon database" OR PlanetScale OR "Turso database" OR "Convex database" OR Xata'
+
+exclude:
+  question: Is this post a job posting, an event or webinar promotion, or a giveaway?
+
+scoring:
+  significance:
+    question: How much could this change a startup's choice of database provider?
+    focus: Judge the change itself, not the tone of the post.
+    levels:
+      - summary: negligible
+        signals: [a blog post, a small feature, a customer quote]
+      - summary: noticeable
+        signals: [a useful feature, a new region, a minor price change]
+      - summary: significant
+        signals: [a pricing overhaul, a major version, a large funding round, a multi-hour outage]
+      - summary: market-moving
+        signals: [an acquisition, a free tier removed or added, a data-loss incident]
+  relevance:
+    question: How directly does this affect Pillar's deals and roadmap?
+    levels:
+      - summary: none
+        signals: [a product area Pillar does not compete in]
+      - summary: indirect
+        signals: [general database or infrastructure news]
+      - summary: direct
+        signals: [a feature Pillar also sells or a price change on a comparable plan]
+      - summary: critical
+        signals: [a move aimed at Pillar's customers, such as a migration offer or a cheaper equivalent plan]
+
+actions:
+  - id: sales
+    label: brief sales
+    question: Should Pillar's sales team know about this before their next call with a prospect comparing providers?
+  - id: battlecard
+    label: update the battlecard
+    question: Does this change a fact in a comparison between Pillar and this competitor (price, limit, feature, region)?
+  - id: roadmap
+    label: discuss in product
+    question: Does this show a feature or direction Pillar's product team should discuss?
+
+draft:
+  template: |-
+    You brief the sales and product teams at {org}. {about}
+    Only state facts found in the sources below, and cite each one with its URL.
+
+    Competitor update: {title}
+    Suggested actions: {actions}
+    Sources:
+    {sources}
+
+    Give me: what changed in two sentences, what it means for deals against this competitor, and one suggested talking point.
+
+grouping:
+  stopwords: [postgres, database, databases]
+
+# Competitor news is rarer than ecosystem news and each item matters: alert a little earlier and allow more per day.
+policy:
+  alertThreshold: 2.5
+  dailyCap: 8
+
+budget:
+  usd_per_day: 2

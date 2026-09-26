@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "xscout",
+  "description": "Set up and use xscout: watches X for the news that matters to you, judged by Jev, and alerts you in Slack.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ethan Abimelech",
+    "url": "https://github.com/ethan-ab"
+  },
+  "homepage": "https://github.com/ethan-ab/xscout-jev",
+  "repository": "https://github.com/ethan-ab/xscout-jev",
+  "license": "MIT",
+  "keywords": ["x", "twitter", "monitoring", "alerts", "news", "competitive-intelligence", "jev"]
+}

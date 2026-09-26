@@ -1,0 +1,47 @@
+{
+  "name": "xscout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Watches X for the news that matters to you, judged by Jev (TypeSafe), and alerts you in Slack.",
+  "keywords": [
+    "x",
+    "twitter",
+    "monitoring",
+    "alerts",
+    "news",
+    "competitive-intelligence",
+    "jev",
+    "treg"
+  ],
+  "homepage": "https://github.com/ethan-ab/xscout-jev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethan-ab/xscout-jev.git"
+  },
+  "bugs": "https://github.com/ethan-ab/xscout-jev/issues",
+  "author": "Ethan Abimelech",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "scout": "node --disable-warning=ExperimentalWarning --import tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "check": "pnpm typecheck && pnpm lint && pnpm test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/node": "^22.18.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  },
+  "dependencies": {
+    "tsx": "^4.23.15",
+    "yaml": "^2.9.1"
+  }
+}

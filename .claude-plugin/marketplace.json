@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "xscout-jev",
+  "description": "xscout: watch X for the news that matters to you, judged by Jev.",
+  "owner": {
+    "name": "Ethan Abimelech",
+    "url": "https://github.com/ethan-ab"
+  },
+  "plugins": [
+    {
+      "name": "xscout",
+      "description": "Set up and use xscout: watches X for the news that matters to you, judged by Jev, and alerts you in Slack.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/ethan-ab/xscout-jev"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+# Starter profile: copy it with `pnpm scout init`, then replace every value with your own.
+# The example watches the JavaScript ecosystem for a fictional developer-tools company.
+# Every field is documented in docs/profile.md.
+
+# Names the data folder (data/<name>/). Letters, digits, - and _.
+name: starter
+
+# Who the alerts are for. `about` is given to the judge as context for relevance, exclusion and actions.
+org:
+  name: Lintel
+  about: Lintel makes a code-quality platform for JavaScript and TypeScript teams, with a linter, a formatter and CI checks.
+
+locale:
+  timezone: Europe/London # used for quiet hours and displayed times
+  lang: en # keyword searches only return posts in this language; remove to search every language
+
+# What you care about. Each post is classified into one of these, `other` or `off_topic`.
+# `what` says what belongs, `not_for` what looks similar but does not, `examples` are posts like the ones you want.
+topics:
+  - id: runtimes
+    label: Runtimes
+    what: "JavaScript runtimes and platforms: Node.js, Deno, Bun, edge runtimes; their releases, performance and compatibility changes"
+    not_for: tutorials and beginner tips about using a runtime
+    examples:
+      - Node.js 26 is out with a built-in TypeScript type stripper
+      - Bun now runs most Next.js apps unchanged
+  - id: frameworks
+    label: Frameworks
+    what: "front-end and full-stack frameworks and build tools: React, Next.js, Angular, Astro, Remix, Vue, Svelte, Vite; major releases, new APIs, deprecations"
+    not_for: job posts and course promotions
+    examples:
+      - React 20 removes class components
+      - Vite 8 switches its bundler to Rolldown
+  - id: typescript
+    label: TypeScript
+    what: "the TypeScript language and compiler: releases, new type-system features, the native compiler, tooling support"
+    examples:
+      - TypeScript 7 ships the Go-based compiler as the default
+      - The TypeScript team proposes type annotations in JavaScript
+
+sources:
+  # Official accounts: interesting from the first minute, no engagement floor. Handle → one line on who they are.
+  primary:
+    nodejs: official Node.js account
+    deno_land: official Deno account
+    bunjavascript: official Bun account
+    reactjs: official React account
+    nextjs: official Next.js account
+    angular: official Angular account
+    astrodotbuild: official Astro account
+    remix_run: official Remix account
+    typescript: official TypeScript account
+  # News accounts: several of them covering the same story is the strongest "big news" signal.
+  amplifiers:
+    ThisWeekInReact: weekly React and React Native newsletter
+    thenewstack: developer and infrastructure news outlet
+    Techmeme: tech news aggregator
+  # X search expressions. Quote multi-word terms and wrap OR groups in parentheses.
+  keywords:
+    runtimes: '"Node.js" OR Deno OR "Bun runtime" OR "edge runtime"'
+    releases: '(React OR Vue OR Svelte OR Vite OR Angular OR Astro OR "Next.js" OR TypeScript) ("is out" OR released OR "now available" OR RFC)'
+  keyword_min_faves: 20 # ignore keyword matches with fewer likes
+
+# Posts to drop before scoring: names or handles matched as whole words (case-insensitive), and/or a yes/no question for the judge.
+exclude:
+  blocklist: [lintel] # your own name: you already know your own news
+  question: Is this post a promotion for a commercial code-quality product, such as a sponsored post, a discount or a webinar?
+
+# Score = significance + relevance, each on a 0-3 scale built from four levels (lowest first).
+# The default alert threshold is 3.0, e.g. "notable" (1) plus "relevant" (2); docs/profile.md explains when an event alerts.
+scoring:
+  significance:
+    question: How big is the update announced or reported in this post, for the JavaScript ecosystem as a whole?
+    focus: Judge the update itself, not how excited the post sounds.
+    levels:
+      - summary: minor
+        signals: [a patch release, tips or opinions, a small library update]
+      - summary: notable
+        signals: [a minor release with a useful feature, an adoption milestone of a popular tool]
+      - summary: major
+        signals: [a major release of a runtime, framework or TypeScript, a deprecation that forces migrations]
+      - summary: ecosystem-shifting
+        signals: [a new standard or runtime that changes how JavaScript is written, a large acquisition]
+  relevance:
+    question: How much does this matter to Lintel's customers and product?
+    levels:
+      - summary: unrelated
+        signals: [nothing to do with code quality or developer workflow]
+      - summary: background
+        signals: [general JavaScript news]
+      - summary: relevant
+        signals: [changes to syntax, types or build tools that linters and formatters must follow]
+      - summary: core
+        signals: [a change to TypeScript or ESLint-style tooling, a new built-in linter or formatter in a runtime]
+
+# Suggested actions: one yes/no question each; alerts list the ones that apply.
+actions:
+  - id: support
+    label: add support
+    question: Does this require Lintel to support a new syntax, runtime or tool version?
+  - id: post
+    label: write a post
+    question: Could Lintel write a useful post or guide about this for JavaScript teams?
+
+# The prompt printed with each alert, ready to paste into any assistant.
+# Placeholders: {org} {about} {title} {actions} {sources}
+draft:
+  template: |-
+    You write developer-focused posts for {org}. {about}
+    Only state facts found in the sources below, and cite each one with its URL.
+
+    Update: {title}
+    Suggested actions: {actions}
+    Sources:
+    {sources}
+
+    Give me: what changed, why it matters to JavaScript teams, and a draft post under 150 words.
+
+# Words that appear in many posts and should not link unrelated posts into one event.
+grouping:
+  stopwords: [javascript, release, released]
+
+# Optional overrides of the alert policy (every setting is listed in docs/profile.md).
+policy:
+  dailyCap: 3 # at most 3 notable alerts a day (default 5); big and trending alerts are not capped
+
+# Stop calling treg and Jev once today's spend (UTC) reaches this.
+budget:
+  usd_per_day: 2

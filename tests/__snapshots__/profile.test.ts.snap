@@ -1,0 +1,213 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`profile > keeps the questions Jev receives for the ai-apps example 1`] = `
+"{
+ "filter": {
+  "topic": {
+   "type": "choice",
+   "instructions": {
+    "question": "Which topic is this X post mainly about?",
+    "context": "We track four topics in the AI agent ecosystem. Pick other_ai for AI posts outside them and off_topic for anything else."
+   },
+   "criteria": {
+    "ai_host": {
+     "what": "AI assistants as distribution platforms: apps, plugins or connectors inside ChatGPT, Claude, Codex, Cowork, Gemini, Muse or Grok; their directories, submission rules, install flows, ads and discovery",
+     "not_for": "the ChatGPT or Claude mobile/desktop application's own features, outages or bugs unrelated to apps",
+     "examples": [
+      "Starting today you can connect multiple accounts with most plugins in ChatGPT",
+      "Muse connectors platform is open to developers"
+     ]
+    },
+    "protocol": {
+     "what": "protocols and standards for agents and AI apps: MCP, MCP Apps, WebMCP, A2A, A2UI, AAIF, Agent Plugins, agent auth (ID-JAG), and products adopting them",
+     "not_for": "commerce and payment protocols (that is agentic_commerce)",
+     "examples": [
+      "Stripe implemented WebMCP",
+      "A2A joins AAIF",
+      "New MCP spec release"
+     ]
+    },
+    "agentic_commerce": {
+     "what": "AI agents that shop, check out or pay: UCP, Agentic Commerce Protocol, AP2, x402, agentic checkout, AI Mode checkout, agent payments",
+     "not_for": "crypto price talk, token rallies, memecoins, blockchains or stablecoins joining x402, tokenization or 'machine economy' narratives from crypto and finance accounts, stock or investor commentary",
+     "examples": [
+      "Shopify merchants can now sell through Muse with Shop Pay",
+      "Checkout in Google AI Mode"
+     ]
+    },
+    "personal_agent": {
+     "what": "personal agents and AI assistants acting for one person: Meta Muse, Instinct, Town, Grok Bot, ChatGPT Work, Claude Cowork, Microsoft Scout/Autopilot, OpenClaw, Hermes Agent — their launches, new platforms, features, funding, adoption and the race between them",
+     "not_for": "courses, tips or 'monetize your own agent' promotions; coding agents used only for programming; crypto tokens named after agents; model releases or model rumours (that is other_ai); stock or investor commentary about these products",
+     "examples": [
+      "Muse passed 500K users in its first week",
+      "Instinct raises $1B",
+      "Muse is now available on Mac",
+      "Across Muse, Instinct and Grok Bot, personal agents are going mainstream"
+     ]
+    },
+    "other_ai": "about AI but none of the four topics",
+    "off_topic": {
+     "what": "not about AI products: politics, sports, personal life, and market commentary about AI companies",
+     "examples": [
+      "$META price target raised to $920",
+      "AI tokens rallied 19% this week",
+      "Muse will accelerate CPU orders for $AMD"
+     ]
+    }
+   }
+  },
+  "speaker": {
+   "type": "choice",
+   "instructions": "Who is speaking, relative to the product in the post?",
+   "criteria": {
+    "maker": {
+     "what": "the author or the author's company built and is launching or updating the product",
+     "examples": [
+      "We're happy to announce our plugin is now available"
+     ]
+    },
+    "reporter": {
+     "what": "the author reports or comments on someone else's product or news",
+     "examples": [
+      "Meta's new agent passed 2.6M downloads"
+     ]
+    },
+    "promoter": {
+     "what": "the author promotes someone else's product with hype or a call to action, like a paid influencer",
+     "examples": [
+      "Wait... you can build and monetize your own AI agent? With AITOPIA you can"
+     ]
+    },
+    "user": {
+     "what": "the author shares their own experience using a product",
+     "examples": [
+      "My OpenClaw now clears my inbox every morning"
+     ]
+    },
+    "no_product": "no specific product: opinion, tutorial, course, meme"
+   }
+  },
+  "excluded": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Is this post promoting a course, a paid community, a newsletter or a giveaway?"
+   }
+  }
+ },
+ "score": {
+  "significance": {
+   "type": "score",
+   "instructions": {
+    "question": "How big is the update announced or reported in this post, for the AI agent and AI app ecosystem as a whole?",
+    "focus": "Judge the update itself, not how excited the post sounds."
+   },
+   "criteria": [
+    {
+     "summary": "minor",
+     "signals": [
+      "one company lists its app, plugin or MCP server",
+      "a small feature",
+      "tips, opinions, personal usage"
+     ]
+    },
+    {
+     "summary": "notable",
+     "signals": [
+      "a well-known company ships a meaningful agent feature or connector",
+      "a popular agent ships a big release",
+      "an adoption milestone of an important product"
+     ]
+    },
+    {
+     "summary": "major",
+     "signals": [
+      "an AI platform (OpenAI, Anthropic, Google, Meta, Microsoft, xAI) or a major infrastructure player (Stripe, Shopify, Cloudflare, Vercel) changes how AI apps or agents are built, distributed, paid or monetized",
+      "a new app store, directory, SDK or platform policy",
+      "a big tech company or a top-funded startup launches or significantly expands a personal agent (new platform, connectors, desktop app, big funding round)"
+     ]
+    },
+    {
+     "summary": "industry-shifting",
+     "signals": [
+      "a new open standard or protocol, or a new version of MCP",
+      "several major platforms adopt the same standard",
+      "a large acquisition that reshapes the ecosystem"
+     ]
+    }
+   ]
+  },
+  "relevance": {
+   "type": "score",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "How credibly can Acme speak about this topic from its own product and expertise?"
+   },
+   "criteria": [
+    {
+     "summary": "no standing",
+     "signals": [
+      "unrelated to MCP, AI apps or agent distribution"
+     ]
+    },
+    {
+     "summary": "can comment",
+     "signals": [
+      "general AI agent news"
+     ]
+    },
+    {
+     "summary": "informed voice",
+     "signals": [
+      "affects how brands reach users in AI assistants",
+      "agentic commerce",
+      "personal agents (Muse, Instinct, Town, Grok Bot) becoming a new way users reach services"
+     ]
+    },
+    {
+     "summary": "expert voice",
+     "signals": [
+      "MCP, MCP Apps, WebMCP, ChatGPT plugins, Claude connectors, app submission and review",
+      "a personal agent opening to third-party apps, connectors or MCP (e.g. Muse Connectors)"
+     ]
+    }
+   ]
+  },
+  "action_how_to": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Could Acme publish a practical guide about this (how to build, publish or adapt an app or MCP server for it)?"
+   }
+  },
+  "action_explainer": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Could Acme publish an explainer of this protocol, standard or platform change for builders?"
+   }
+  },
+  "action_hot_take": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Could Acme publish a credible opinion on what this move means for distribution through AI assistants?"
+   }
+  },
+  "action_brand_showcase": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Is this a known brand launching an app in an AI assistant that Acme could showcase as an example for other brands?"
+   }
+  },
+  "action_data_point": {
+   "type": "noul",
+   "instructions": {
+    "context": "Acme is an independent newsletter and consultancy for product teams that build apps inside AI assistants (ChatGPT plugins, Claude connectors, Muse connectors) and adopt agent protocols such as MCP.",
+    "question": "Does this post contain a striking number Acme could quote in its newsletter or a client workshop?"
+   }
+  }
+ }
+}"
+`;

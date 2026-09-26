@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": { "includes": ["src/**", "tests/**", "*.json", "*.ts", ".claude-plugin/*.json"] },
+  "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 140 },
+  "linter": {
+    "rules": {
+      "preset": "recommended",
+      "style": { "noNonNullAssertion": "off" }
+    }
+  },
+  "overrides": [{ "includes": ["tests/**"], "linter": { "rules": { "suspicious": { "noExplicitAny": "off" } } } }],
+  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+}
