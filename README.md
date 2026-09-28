@@ -4,6 +4,8 @@ Watches X for the updates that matter to you, has [Jev](https://docs.typesafe.ai
 
 You describe what you care about in one YAML profile: who you are, the topics you follow, the accounts and keywords to watch, what makes an update big or relevant for you, and what you would do with it. xscout collects matching posts, has [Jev](https://docs.typesafe.ai) judge each one against your profile, groups posts about the same update, and alerts when an update is big, trending or notable. Each alert comes with a ready-to-paste prompt to draft a post, a sales brief or whatever you do next (`pnpm scout show <id>`).
 
+![A day of X posts about AI agents: 260 posts in, 5 stories out, $0.028 spent on Jev](docs/demo.gif)
+
 An alert in Slack looks like this (from the [`ai-apps`](profiles/ai-apps.yaml) example, which watches the AI app ecosystem):
 
 ```text
